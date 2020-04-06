@@ -1,0 +1,234 @@
+package com.maven.MavenProj1.DAO;
+
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.maven.MavenProj1.Bean.BookingBean;
+import com.maven.MavenProj1.Bean.HotelBean;
+import com.maven.MavenProj1.Bean.UserProfileBean;
+
+
+@Repository
+public class DAO {
+	@Autowired
+	SessionFactory sf;
+	HotelBean hotelBean;
+	
+	/*------------------------HOTEL-------------------*/
+	public HotelBean addHotel(HotelBean addhotel)
+	{
+		Session sn=sf.openSession();
+		Transaction trx= sn.beginTransaction();
+		sn.save(addhotel);
+		trx.commit();
+		sn.close();
+		return addhotel;
+	}
+	
+	public List<HotelBean> hotelList(){
+		
+		Session sn= sf.openSession();
+		Query q=sn.createQuery("from HotelBean");
+		List<HotelBean> hotelList =q.list();
+		sn.close();
+		return hotelList;		
+	}
+	
+	public HotelBean updateHotel(HotelBean updatehotel)
+	{
+		
+		Session sn=sf.openSession();
+		Transaction trx= sn.beginTransaction();
+		sn.update(updatehotel);
+		trx.commit();
+		sn.close();
+		return updatehotel;
+	}
+	public HotelBean delHotel(int hotelId)
+	{
+		Session sn=sf.openSession();
+		Transaction trx= sn.beginTransaction();
+		HotelBean delHotel=(HotelBean) sn.get(HotelBean.class, hotelId);
+		sn.delete(delHotel);
+		trx.commit();
+		sn.close();
+		return delHotel;
+	}
+	
+	
+	/*------------USER-------------------*/
+	public UserProfileBean addUser(UserProfileBean adduser)
+	{
+		Session sn=sf.openSession();
+		Transaction trx= sn.beginTransaction();
+		sn.save(adduser);
+		trx.commit();
+		sn.close();
+		return adduser;
+	}
+	
+	public UserProfileBean updateUser(UserProfileBean updateuser)
+	{
+		
+		Session sn=sf.openSession();
+		Transaction trx= sn.beginTransaction();
+		sn.update(updateuser);
+		trx.commit();
+		sn.close();
+		return updateuser;
+	}
+	public UserProfileBean delUser(int userId)
+	{
+		Session sn=sf.openSession();
+		Transaction trx= sn.beginTransaction();
+		UserProfileBean delUser=(UserProfileBean) sn.get(UserProfileBean.class, userId);
+		sn.delete(delUser);
+		trx.commit();
+		sn.close();
+		return delUser;
+	}
+	
+	
+	/*---------------------------SEARCH BY----------------------------------------*/
+	
+	
+	public HotelBean searchByCity(String searchCity)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		HotelBean searchHotel=(HotelBean) sn.get(HotelBean.class, searchCity);
+		return searchHotel;
+	}
+	
+	public HotelBean searchByRooms(int noOfRooms)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		HotelBean searchHotel_rooms=(HotelBean) sn.get(HotelBean.class, noOfRooms);
+		return searchHotel_rooms;
+	}
+	
+	public HotelBean searchByStars(int searchStars)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		HotelBean searchHotel_stars=(HotelBean) sn.get(HotelBean.class, searchStars);
+		return searchHotel_stars;
+	}
+	
+	public HotelBean searchByTraveller(int searchTravellers)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		HotelBean searchHotel_travellers=(HotelBean) sn.get(HotelBean.class, searchTravellers);
+		return searchHotel_travellers;
+	}
+	
+	public HotelBean searchByWifi(String searchWifi)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		HotelBean searchHotel_wifi=(HotelBean) sn.get(HotelBean.class, searchWifi);
+		return searchHotel_wifi;
+	}
+	
+	public HotelBean searchByRestaurant(String searchRestaurant)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		HotelBean searchHotel_restaurant=(HotelBean) sn.get(HotelBean.class, searchRestaurant);
+		return searchHotel_restaurant;
+	}
+	
+	public HotelBean searchByAC(String searchAC)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		HotelBean searchHotel_AC=(HotelBean) sn.get(HotelBean.class, searchAC);
+		return searchHotel_AC;
+	}
+	
+	public HotelBean searchByCost(int costOfDay)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		
+		if(costOfDay<hotelBean.getCostOfStay())
+		{
+			HotelBean searchHotel_cost=(HotelBean) sn.get(HotelBean.class, costOfDay);
+			return searchHotel_cost;
+		}
+		else
+		{
+			return null;
+		}
+		
+	}
+	
+	public HotelBean searchByRating(int searchRating)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		if(searchRating<hotelBean.getNoOfStars())
+		{
+			HotelBean searchHotel_rating=(HotelBean) sn.get(HotelBean.class, searchRating);
+			return searchHotel_rating;
+		}
+		else
+		{
+			return null;
+		}
+		
+	}
+	
+	public HotelBean bookingRoom()
+	{
+		
+		return hotelBean;
+		
+	}
+	
+	
+	public BookingBean bookRoom(BookingBean bookingBean)
+	{
+		Session sn=sf.openSession();
+		Transaction trx=sn.beginTransaction();
+		System.out.println(bookingBean.getHotelId());
+		sn.save(bookingBean);
+		HotelBean hotelBean=bookingBean.getHotelId();
+		System.out.println(this.hotelBean);
+		UpdateNoOfRooms(this.hotelBean,bookingBean);
+		System.out.println(bookingBean.getReservationCapacity());
+		sn.update(hotelBean);
+		trx.commit();
+		sn.close();
+		return bookingBean;
+		
+	}
+
+	public HotelBean UpdateNoOfRooms(HotelBean hotelBean,BookingBean bookingBean)
+	{
+		
+		System.out.println(hotelBean.getHotelId());
+		int noOfRooms= hotelBean.getNoOfRooms();
+		System.out.println(noOfRooms + "HOTEL BEAN ROOM RESERVATION CAPCITY");
+		int reservationBean1=bookingBean.getReservationCapacity();
+		int updaterooms=noOfRooms-reservationBean1;
+		hotelBean.setNoOfRooms(updaterooms);
+		System.out.println(reservationBean1 +" NO OF ROOMS OF BOOKING");
+		return hotelBean;
+	}
+	
+	
+	
+
+	
+	
+
+}

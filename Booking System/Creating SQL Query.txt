@@ -1,0 +1,178 @@
+******************HOTEL********************
+SQL> create table hotel(
+ hotelId int NOT NULL PRIMARY KEY,
+hotelName varchar(20),
+hotelCity varchar(20),
+noOfRooms int,
+noOfStars int,
+wifi varchar(3),
+restaurantAvailable varchar(3),
+AC varchar(3),
+meals varchar(3),
+costOfStay int);
+
+**********************USER*******************
+
+SQL> create table userProfile(
+userId int NOT NULL PRIMARY KEY,
+userName varchar(20),
+gender varchar(1),
+userCity varchar(20));
+
+****************BOOKING*********************
+
+SQL>  create table booking(
+ bookingId int NOT NULL PRIMARY KEY,
+ userId int,
+ hotelId int,
+ review varchar(30),
+reservationCapacity int,
+ FOREIGN KEY(userId) REFERENCES userProfile(userId),
+ FOREIGN KEY(hotelId) REFERENCES hotel(hotelId));
+
+*********************Insert ****************************
+
+****************** INSERT HOTEL ******************
+
+SQL> insert into hotel values(&hotelId,&hotelName,&hotelCity,&noOfRooms,&noOfSta
+rs,&wifi,&restaurantAvailable,&AC,&meals,&costOfStay);
+Enter value for hotelid: 9001
+Enter value for hotelname: 'Hotel Taj'
+Enter value for hotelcity: 'Mumbai'
+Enter value for noofrooms: 250
+Enter value for noofstars: 7
+Enter value for wifi: 'Yes'
+Enter value for restaurantavailable: 'Yes'
+Enter value for ac: 'Yes'
+Enter value for meals: 'Yes'
+Enter value for costofstay: 2500
+old   1: insert into hotel values(&hotelId,&hotelName,&hotelCity,&noOfRooms,&noO
+fStars,&wifi,&restaurantAvailable,&AC,&meals,&costOfStay)
+new   1: insert into hotel values(9001,'Hotel Taj','Mumbai',250,7,'Yes','Yes','Y
+es','Yes',2500)
+
+1 row created.
+
+SQL> /
+Enter value for hotelid: 9002
+Enter value for hotelname: 'Hotel Orion'
+Enter value for hotelcity: 'Kolkata'
+Enter value for noofrooms: 150
+Enter value for noofstars: 5
+Enter value for wifi: 'Yes'
+Enter value for restaurantavailable: 'Yes'
+Enter value for ac: 'Yes'
+Enter value for meals: 'Yes'
+Enter value for costofstay: 1500
+old   1: insert into hotel values(&hotelId,&hotelName,&hotelCity,&noOfRooms,&noO
+fStars,&wifi,&restaurantAvailable,&AC,&meals,&costOfStay)
+new   1: insert into hotel values(9002,'Hotel Orion','Kolkata',150,5,'Yes','Yes'
+,'Yes','Yes',1500)
+
+1 row created.
+
+SQL> /
+Enter value for hotelid: 9003
+Enter value for hotelname: 'Hotel Townhouse'
+Enter value for hotelcity: 'Bhubneshwar'
+Enter value for noofrooms: 90
+Enter value for noofstars: 3
+Enter value for wifi: 'Yes'
+Enter value for restaurantavailable: 'Yes'
+Enter value for ac: 'Yes'
+Enter value for meals: 'Yes'
+Enter value for costofstay: 1200
+old   1: insert into hotel values(&hotelId,&hotelName,&hotelCity,&noOfRooms,&noO
+fStars,&wifi,&restaurantAvailable,&AC,&meals,&costOfStay)
+new   1: insert into hotel values(9003,'Hotel Townhouse','Bhubneshwar',90,3,'Yes
+','Yes','Yes','Yes',1200)
+
+1 row created.
+
+SQL> /
+Enter value for hotelid: 9004
+Enter value for hotelname: 'Hotel Inorbit'
+Enter value for hotelcity: 'Varanasi'
+Enter value for noofrooms: 150
+Enter value for noofstars: 3
+Enter value for wifi: 'Yes'
+Enter value for restaurantavailable: 'Yes'
+Enter value for ac: 'Yes'
+Enter value for meals: 'Yes'
+Enter value for costofstay: 1600
+old   1: insert into hotel values(&hotelId,&hotelName,&hotelCity,&noOfRooms,&noO
+fStars,&wifi,&restaurantAvailable,&AC,&meals,&costOfStay)
+new   1: insert into hotel values(9004,'Hotel Inorbit','Varanasi',150,3,'Yes','Y
+es','Yes','Yes',1600)
+
+1 row created.
+
+SQL> /
+Enter value for hotelid: 9005
+Enter value for hotelname: 'Hotel Prides'
+Enter value for hotelcity: 'Agartalla'
+Enter value for noofrooms: 100
+Enter value for noofstars: 5
+Enter value for wifi: 'Yes'
+Enter value for restaurantavailable: 'Yes'
+Enter value for ac: 'Yes'
+Enter value for meals: 'Yes'
+Enter value for costofstay: 2000
+old   1: insert into hotel values(&hotelId,&hotelName,&hotelCity,&noOfRooms,&noO
+fStars,&wifi,&restaurantAvailable,&AC,&meals,&costOfStay)
+new   1: insert into hotel values(9005,'Hotel Prides','Agartalla',100,5,'Yes','Y
+es','Yes','Yes',2000)
+
+********************** BOOKING ************************
+
+SQL> insert into booking values(&bookingId,&userId,&hotelId,&review);
+Enter value for bookingid: 9100
+Enter value for userid: 1001
+Enter value for hotelid: 9001
+Enter value for review: 'Good'
+old   1: insert into booking values(&bookingId,&userId,&hotelId,&review)
+new   1: insert into booking values(9100,1001,9001,'Good')
+
+1 row created.
+
+SQL> /
+Enter value for bookingid: 9200
+Enter value for userid: 1002
+Enter value for hotelid: 9002
+Enter value for review: 'Very Good'
+old   1: insert into booking values(&bookingId,&userId,&hotelId,&review)
+new   1: insert into booking values(9200,1002,9002,'Very Good')
+
+1 row created.
+
+SQL> /
+Enter value for bookingid: 9300
+Enter value for userid: 1003
+Enter value for hotelid: 9003
+Enter value for review: 'Excellent'
+old   1: insert into booking values(&bookingId,&userId,&hotelId,&review)
+new   1: insert into booking values(9300,1003,9003,'Excellent')
+
+1 row created.
+
+SQL> /
+Enter value for bookingid: 9400
+Enter value for userid: 1004
+Enter value for hotelid: 9004
+Enter value for review: 'Very Good'
+old   1: insert into booking values(&bookingId,&userId,&hotelId,&review)
+new   1: insert into booking values(9400,1004,9004,'Very Good')
+
+1 row created.
+
+SQL> /
+Enter value for bookingid: 9500
+Enter value for userid: 1005
+Enter value for hotelid: 9005
+Enter value for review: 'Good'
+old   1: insert into booking values(&bookingId,&userId,&hotelId,&review)
+new   1: insert into booking values(9500,1005,9005,'Good')
+
+1 row created.
+
+SQL>
